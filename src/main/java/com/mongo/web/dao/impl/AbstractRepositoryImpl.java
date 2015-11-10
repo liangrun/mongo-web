@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.mongo.web.dao.AbstractRepository;
+import com.mongo.web.util.ClassUtil;
 
 @Repository
 public class AbstractRepositoryImpl<T,Q extends Serializable> implements AbstractRepository<T,Q>{
@@ -22,7 +23,7 @@ public class AbstractRepositoryImpl<T,Q extends Serializable> implements Abstrac
 	@SuppressWarnings("unchecked")
 	protected  AbstractRepositoryImpl() {
 		//set bean
-		bean = (Class<T>) String.class;
+		bean = (Class<T>) ClassUtil.getTypeArguments(AbstractRepositoryImpl.class, getClass()).get(0);
 	}
 	
 	/*private MongoDbFactory mongoDbFactory;
